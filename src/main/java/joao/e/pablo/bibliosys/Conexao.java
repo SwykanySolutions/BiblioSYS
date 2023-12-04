@@ -23,7 +23,7 @@ public class Conexao {
     private static String database;
     private static String username;
     private static String password;
-    private static Connection Conexao;
+    public static Connection Conexao;
 
     public static Connection Conectar() throws SQLException, ClassNotFoundException{
         servername = dotenv.get("DB_HOST");
@@ -31,7 +31,6 @@ public class Conexao {
         database = dotenv.get("DB_NAME");
         username = dotenv.get("DB_USERNAME");
         password = dotenv.get("DB_PASSWORD");
-        System.out.println("Server: " + servername + " Porta: " + port + " Base de dados: " + database + " Usuário: " + username + " Senha: " + password);
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://"+servername+":"+port+"/"+database+"?zeroDateTimeBehavior=CONVERT_TO_NULL";
@@ -52,13 +51,13 @@ public class Conexao {
         }
     }
     
-    public static ResultSet executeQuery(String query, String... params) throws SQLException, ClassNotFoundException {
+    public static ResultSet executeQuery(String query, Object... params) throws SQLException, ClassNotFoundException {
         try{
             Conectar();
             PreparedStatement statement = Conexao.prepareStatement(query);
            
             for (int i = 0; i < params.length; i++) {
-                statement.setString(i + 1, params[i]);
+                statement.setObject(i + 1, params[i]);
             }
             return statement.executeQuery();
              

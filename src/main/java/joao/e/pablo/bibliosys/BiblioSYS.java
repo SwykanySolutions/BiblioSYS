@@ -14,12 +14,12 @@ import java.sql.SQLException;
 public class BiblioSYS {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         Session.start();
         if(Session.getBoolean("login_status")){
-            
+            FormPainel Painel = new FormPainel();
+            Painel.setVisible(true);
         } else {
-            Login loginScreen = new Login();
+            FormLogin loginScreen = new FormLogin();
             loginScreen.setVisible(true);
         }
     }
