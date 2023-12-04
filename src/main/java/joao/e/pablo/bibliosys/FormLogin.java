@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author spanp
  */
-public class Login extends javax.swing.JFrame {
+public class FormLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public FormLogin() {
         initComponents();
     }
 
@@ -46,6 +46,7 @@ public class Login extends javax.swing.JFrame {
         ButtonVisibilidadeSenha = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         ButtonLogin = new javax.swing.JButton();
+        LinkCadastro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +83,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(InputLogin)
                         .addContainerGap())
                     .addGroup(PanelInputLoginLayout.createSequentialGroup()
-                        .addComponent(LabelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LabelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                         .addGap(157, 157, 157))))
         );
         PanelInputLoginLayout.setVerticalGroup(
@@ -117,9 +118,8 @@ public class Login extends javax.swing.JFrame {
                         .addGap(149, 149, 149))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(InputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonVisibilidadeSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(0, 0, 0)
+                        .addComponent(ButtonVisibilidadeSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,6 +157,13 @@ public class Login extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
+        LinkCadastro.setText("Não é cadastrado? cadastre-se já");
+        LinkCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LinkCadastroMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelFormLoginLayout = new javax.swing.GroupLayout(PanelFormLogin);
         PanelFormLogin.setLayout(PanelFormLoginLayout);
         PanelFormLoginLayout.setHorizontalGroup(
@@ -168,6 +175,10 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelInputLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
+            .addGroup(PanelFormLoginLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(LinkCadastro)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelFormLoginLayout.setVerticalGroup(
             PanelFormLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +189,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LinkCadastro)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -195,11 +208,11 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(PanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelFormLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,21 +262,31 @@ public class Login extends javax.swing.JFrame {
         }
         
         try {
-            UserLogin.Login(Login, Senha);
+            User.Login(Login, Senha);
             Boolean retorno = Session.getBoolean("login_status");
             if(!retorno){
                 JOptionPane.showMessageDialog(PanelFormLogin, "Não foi opssível acessar o Sistema Usuário ou senha incorretos tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            Login tela = new Login();
-            Painel tela1 = new Painel();
-            tela.setVisible(false);
+            FormPainel tela1 = new FormPainel();
+            this.setVisible(false);
             tela1.setVisible(true);
         } catch (SQLException | ClassNotFoundException err) {
             JOptionPane.showMessageDialog(null, "Não foi opssível acessar o Login tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, err);
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, err);
         }
     }//GEN-LAST:event_ButtonLoginMouseClicked
 
+    private void LinkCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LinkCadastroMouseClicked
+        // TODO add your handling code here:
+        FormRegistro formRegistro = new FormRegistro();
+        formRegistro.setVisible(!formRegistro.isVisible());
+        this.close();
+    }//GEN-LAST:event_LinkCadastroMouseClicked
+
+    public void close(){
+        this.setVisible(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -281,20 +304,21 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new FormLogin().setVisible(true);
             }
         });
     }
@@ -307,6 +331,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField InputPassword;
     private javax.swing.JLabel LabelLogin;
     private javax.swing.JLabel LabelSenha;
+    private javax.swing.JLabel LinkCadastro;
     private javax.swing.JPanel PanelFormLogin;
     private javax.swing.JPanel PanelInputLogin;
     private javax.swing.JPanel PanelTitulo;

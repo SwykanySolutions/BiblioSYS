@@ -22,6 +22,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.2.0</version>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -32,6 +33,16 @@
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>de.svenkubiak</groupId>
+            <artifactId>jBCrypt</artifactId>
+            <version>0.4.3</version>
         </dependency>
     </dependencies>
 </project>
